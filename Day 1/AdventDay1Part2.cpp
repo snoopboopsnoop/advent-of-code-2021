@@ -6,7 +6,12 @@
 using namespace std;
 
 vector<int> readInput();
-void printVector(vector<int> vector);
+
+template <typename T>
+void printVector(vector<T> vector);
+
+template <typename T>
+void printWrapper(vector<vector<T>> vector);
 
 int main() {
     //write input to vector
@@ -52,8 +57,17 @@ vector<int> readInput() {
     return inputVector;
 }
 
-void printVector(vector<int> vector) {
+template <typename T>
+void printVector(vector<T> vector) {
     for(int i = 0; i < vector.size(); i++) {
-        cout << vector.at(i) << "\n";
+        cout << vector[i] << " ";
+    }
+    cout << endl;
+}
+
+template <typename T>
+void printWrapper(vector<vector<T>> vector) {
+    for(int i = 0; i < vector.size(); i++) {
+        printVector(vector.at(i));
     }
 }
