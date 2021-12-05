@@ -75,44 +75,38 @@ int main() {
         else input.erase(input.begin(), input.begin()+6);
     }
     
+    //number of winning boards
     int winners = 0;
+    //number of boards
     int boardCount = boards.size();
-
-    cout << boardCount << endl;
 
     //check each board for each bingo number
     for(string i : bingoNums) {
         bool winner = false;
-        cout << "number: " << i << endl;
+        //check each board for winner
         for(vector<vector<string>> &board : boards) {
             checkNum(i, board);
             if(isWinner(board)) {
                 winners++;
+                //the "real" winner is the last winner
                 if(winners == boardCount) {
                     cout << "winner: " << endl;
                     printWrapper(board);
-
                     winner = true;
-
-                    cout << "i: " << i << endl;
-                    cout << "sum: " << getSum(board) << endl;
+                    //answer
                     cout << stoi(i)*getSum(board) << endl;
-
                     break;
                 }
-                // cout << "winners: " << winners << endl;
-                
+                //scuffed as fuck solution to my problems but i just null all winning boards
+                //so they don't get recounted as winning but so iteration doesn't go to shit
                 for(vector<string> &line : board) {
                     fill(line.begin(), line.end(), NULL);
                 }
-
             }
         }
         if(winner == true) {
             break;
         }
-        // cout << "boards:" << endl;
-        // print3d(boards);
     }
 
     return 0;
@@ -133,10 +127,10 @@ vector<string> readInput() {
 }
 
 void checkNum(string num, vector<vector<string>> &board) {
+    //iterate through whole board
     for(int i = 0; i < board.size(); i++) {
         for(int j = 0; j < board[0].size(); j++) {
-            // cout << "checking: ";
-            // printVector(board[i]);
+            //if num exists replace it with X
             if(board[i][j] == num) {
                 board[i][j] = 'X';
             }
@@ -176,6 +170,7 @@ bool isWinner(vector<vector<string>> board) {
 }
 
 int getSum(vector<vector<string>> board) {
+    //add all numbers on board that aren't x
     int sum = 0;
     for(int i = 0; i < board.size(); i++) {
         for(int j = 0; j < board[0].size(); j++) {

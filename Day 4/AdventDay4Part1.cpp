@@ -27,6 +27,8 @@ int main() {
     vector<string> bingoNums;
     string line = input[0];
     input.erase(input.begin(), input.begin()+2);
+    //3d array of boards
+    vector<vector<vector<string>>> boards;
 
     while(line.size() != 0) {
         int comma = line.find(",");
@@ -40,10 +42,6 @@ int main() {
             line.erase(line.begin(), line.begin()+comma+1);
         }
     }
-    
-    printVector(bingoNums);
-
-    vector<vector<vector<string>>> boards;
 
     //initialize boards
     while(input.size() != 0) {
@@ -76,25 +74,18 @@ int main() {
         }
         else input.erase(input.begin(), input.begin()+6);
     }
-
-    cout << "boards: " << endl;
-    print3d(boards);
-
     
     //check each board for each bingo number
     for(string i : bingoNums) {
         bool winner = false;
-        cout << "number: " << i << endl;
+        //check each board with drawn number
         for(vector<vector<string>> &board : boards) {
             checkNum(i, board);
             if(isWinner(board)) {
-                cout << "winner: " << endl;
                 printWrapper(board);
-
                 winner = true;
-
+                //answer
                 cout << stoi(i)*getSum(board) << endl;
-
                 break;
             }
         }
@@ -121,10 +112,10 @@ vector<string> readInput() {
 }
 
 void checkNum(string num, vector<vector<string>> &board) {
+    //iterate through whole board
     for(int i = 0; i < board.size(); i++) {
         for(int j = 0; j < board[0].size(); j++) {
-            // cout << "checking: ";
-            // printVector(board[i]);
+            //if num exists replace it with X
             if(board[i][j] == num) {
                 board[i][j] = 'X';
             }
@@ -164,6 +155,7 @@ bool isWinner(vector<vector<string>> board) {
 }
 
 int getSum(vector<vector<string>> board) {
+    //add all numbers on board that aren't x
     int sum = 0;
     for(int i = 0; i < board.size(); i++) {
         for(int j = 0; j < board[0].size(); j++) {
