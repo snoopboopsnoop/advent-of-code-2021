@@ -10,18 +10,10 @@ using namespace std;
 
 vector<string> readInput();
 
-template <typename T>
-void printVector(vector<T> vector);
-
-template <typename T>
-void printWrapper(vector<vector<T>> vector);
-
-template <typename T>
-void print3d(vector<vector<T>> vector);
-
 int main() {
     //write input to vector
     vector<string> input = readInput();
+    //stores all important coords
     map<pair<int, int>, int> map;
     int count = 0;
 
@@ -107,7 +99,7 @@ int main() {
     }
     //answer
     cout << count << endl;
-    
+
     return 0;
 }
 
@@ -123,29 +115,4 @@ vector<string> readInput() {
         }
     }
     return inputVector;
-}
-
-template <typename T>
-void printVector(vector<T> vector) {
-    for(int i = 0; i < vector.size(); i++) {
-        cout << vector[i] << ", ";
-    }
-    cout << "\n";
-}
-
-template <typename T>
-void printWrapper(vector<vector<T>> vector) {
-    for(int i = 0; i < vector.size(); i++) {
-        printVector(vector.at(i));
-    }
-}
-
-template <typename T>
-void print3d(vector<vector<T>> vector) {
-    for(int i = 0; i < vector.size(); i++) {
-        for(int j = 0; j < vector[0].size(); j++) {
-            printVector(vector[i][j]);
-        }
-        cout << endl;
-    }
 }
