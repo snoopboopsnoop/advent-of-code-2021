@@ -7,7 +7,7 @@
 
 using namespace std;
 
-vector<string> readInput();
+vector<string> readInput(); 
 long long getFuelCount(vector<int> crabs, int num);
 
 template <typename T>
@@ -47,8 +47,6 @@ int main() {
 
     cout << lowestPos << endl;
     cout << lowestVal << endl;
-    
-    cout << getFuelCount(crabs, 2) << endl;
 
     return 0;
 }

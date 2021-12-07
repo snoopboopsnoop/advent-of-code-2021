@@ -22,8 +22,7 @@ int main() {
     vector<int> crabs;
     int lowestPos;
     int lowestVal;
-
-    cout << input[0] << endl;
+    int median;
 
     while(input[0].find(",") != string::npos) {
         int comma = input[0].find(",");
@@ -34,22 +33,19 @@ int main() {
 
     sort(crabs.begin(), crabs.end());
 
-    for(int i = 0; i < crabs.size(); i++) {
-        int currVal = getFuelCount(crabs, crabs[i]);
-        cout << "position: " << i << endl;
-        cout << "fuelcount: " << currVal << endl;
+    median = crabs[crabs.size()/2];
 
-        if(!lowestVal) {
-            lowestVal = currVal;
-            lowestPos = i;
+    if(crabs.size()%2 == 0) {
+        int otherMed = crabs[(crabs.size()/2)-1];
+        if(getFuelCount(crabs, median) < getFuelCount(crabs, otherMed)) {
+            lowestVal = getFuelCount(crabs, median);
         }
-        else if(currVal < lowestVal) {
-            lowestVal = currVal;
-            lowestPos = i;
+        else {
+            lowestVal = getFuelCount(crabs, otherMed);
         }
     }
+    else lowestVal = getFuelCount(crabs, median);
 
-    cout << lowestPos << endl;
     cout << lowestVal << endl;
     
     return 0;
