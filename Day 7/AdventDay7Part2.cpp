@@ -19,6 +19,7 @@ void printWrapper(vector<vector<T>> vector);
 int main() {
     //write input to vector
     vector<string> input = readInput();
+    //crab positions
     vector<int> crabs;
     long long lowestPos = -1;
     long long lowestVal = -1;
