@@ -7,9 +7,11 @@
 
 using namespace std;
 
-vector<string> readInput();
-int getFuelCount(vector<int> crabs, int num);
+//https://www.youtube.com/watch?v=zp4BMR88260
 
+vector<string> readInput();
+
+//debug functions
 template <typename T>
 void printVector(vector<T> vector);
 
@@ -19,14 +21,14 @@ void printWrapper(vector<vector<T>> vector);
 int main() {
     //write input to vector
     vector<string> input = readInput();
-    vector<string> unique;
-
     int count = 0;
 
+    //take the output section of each line
     for(string i : input) {
         string curr;
         string output = i.substr(i.find("|")+2);
 
+        //separate each output code into individual strings
         while(output.size() != 0) {
             if(output.find(" ") == string::npos) {
                 curr = output.substr(0);
@@ -37,12 +39,14 @@ int main() {
                 output.erase(0, output.find(" ")+1);
             }
 
+            //unique sizes for 7 seg displays
             if(curr.size() == 2 || curr.size() == 3 || curr.size() == 4 || curr.size() == 7) {
                 count++;
             }
         }
     }
     
+    //answer
     cout << count << endl;
 
     return 0;
@@ -60,15 +64,6 @@ vector<string> readInput() {
         }
     }
     return inputVector;
-}
-
-int getFuelCount(vector<int> crabs, int num) {
-    int fuel = 0;
-    for(int i = 0; i < crabs.size(); i++) {
-        //add distance away
-        fuel += abs(crabs[i] - num);
-    }
-    return fuel;
 }
 
 template <typename T>
