@@ -5,8 +5,11 @@
 
 using namespace std;
 
+//commence the christmas tears and brain rot!
+
 vector<int> readInput();
 
+//debug functions
 template <typename T>
 void printVector(vector<T> vector);
 
@@ -28,6 +31,7 @@ int main() {
         last = input[i];
     }
 
+    //answer
     cout << count;
 
     return 0;
