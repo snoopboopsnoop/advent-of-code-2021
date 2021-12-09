@@ -10,6 +10,7 @@ using namespace std;
 vector<string> readInput();
 int getFuelCount(vector<int> crabs, int num);
 
+//debug functions
 template <typename T>
 void printVector(vector<T> vector);
 
