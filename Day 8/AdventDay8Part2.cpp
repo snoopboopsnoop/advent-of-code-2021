@@ -193,14 +193,14 @@ void solve(vector<string>& encrypted, map<char, char>& letters, map<string, int>
 
     //5
     for(string i : encrypted) {
-        //other one missing e
+        //other one missing e is 5
         if(i.find(letters.at('e')) == string::npos && i.size() == 5) {
             //the other 5 letter char in i is supposed to be c 
             for(auto elem : missing) {
                 if(i.find(elem.first) == string::npos && elem.first != letters.at('e')) {
                     letters.insert(pair<char, char>('c', elem.first));
-                    //it's 5
                     numbers.insert(pair<string, int>(i, 5));
+
                     encrypted.erase(find(encrypted.begin(), encrypted.end(), i));
                     break;
                 }
@@ -213,6 +213,7 @@ void solve(vector<string>& encrypted, map<char, char>& letters, map<string, int>
     for(string i : encrypted) {
         //unknown letter in 3 letter code is a
         if(i.size() == 3) {
+            //there's probably a better way to implement this but chicken breast brain moment
             for(char j : i) {
                 bool found = false;
                 for(auto elem : letters) {
@@ -245,7 +246,7 @@ void solve(vector<string>& encrypted, map<char, char>& letters, map<string, int>
         }
     }
 
-    //c
+    //last unknown letter is g
     for(auto elem : missing) {
         bool found = false;
         for(auto i : letters) {
@@ -261,12 +262,15 @@ void solve(vector<string>& encrypted, map<char, char>& letters, map<string, int>
     //0, 6, 9
     for(string code : encrypted) {
         if(code.size() == 6) {
+            //0 no d
             if(code.find(letters.at('d')) == string::npos) {
                 numbers.insert(pair<string, int>(code, 0));
             }
+            //6 no c
             else if(code.find(letters.at('c')) == string::npos) {
                 numbers.insert(pair<string, int>(code, 6));
             }
+            //9 no e
             else if(code.find(letters.at('e')) == string::npos) {
                 numbers.insert(pair<string, int>(code, 9));
             }
