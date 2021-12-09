@@ -9,6 +9,7 @@ using namespace std;
 
 vector<string> readInput();
 
+//debug functions
 template <typename T>
 void printVector(vector<T> vector);
 
@@ -18,9 +19,11 @@ void printWrapper(vector<vector<T>> vector);
 int main() {
     //write input to vector
     vector<string> input = readInput();
+    //2d array of input
     vector<vector<int>> map;
     int count = 0;
 
+    //input -> map
     for(string i : input) {
         vector<int> temp;
         while(i.size() != 0) {
@@ -30,6 +33,7 @@ int main() {
         map.push_back(temp);
     }
 
+    //find each low point
     for(int i = 0; i < map.size(); i++) {
         for(int j = 0; j < map[0].size(); j++) {
             int curr = map[i][j];
@@ -61,8 +65,7 @@ int main() {
         }
     }
 
-    //printWrapper(map);
-
+    //answer
     cout << count << endl;
 
     return 0;
