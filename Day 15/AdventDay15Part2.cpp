@@ -50,14 +50,46 @@ int main() {
 
     //input -> map
     for(string i : input) {
+        vector<int> line;
         vector<int> temp;
-        while(i.size() != 0) {
-            temp.push_back(stoi(i.substr(0,1)));
-            i.erase(i.begin());
-        }
-        map.push_back(temp);
+            while(i.size() != 0) {
+                temp.push_back(stoi(i.substr(0,1)));
+                i.erase(i.begin());
+            }
+            line.insert(line.begin(), temp.begin(), temp.end());
+            for(int j = 0; j < 4; j++) {
+                vector<int> increment(temp.size());
+                transform(temp.begin(), temp.end(), increment.begin(), [](int x) -> int {
+                    if(x == 9) {
+                        return 1;
+                    }
+                    else return ++x;
+                });
+                temp.clear();
+                temp.insert(temp.begin(), increment.begin(), increment.end());
+                line.insert(line.end(), temp.begin(), temp.end());
+            }
+        map.push_back(line);
     }
-
+    vector<vector<int>> tempMap (map);
+    for(int i = 0; i < 4; i++) {
+        for(vector<int>& line : tempMap) {
+            vector<int> temp(line.size());
+            transform(line.begin(), line.end(), temp.begin(), [](int x) -> int {
+                if(x == 9) {
+                    return 1;
+                }
+                else return ++x;
+            });
+            transform(line.begin(), line.end(), line.begin(), [](int x) -> int {
+                if(x == 9) {
+                    return 1;
+                }
+                else return ++x;
+            });
+            map.push_back(temp);
+        }
+    }
     //set goal
     Node::goal = pair<int, int> (map[0].size()-1, map.size()-1);
 
@@ -97,14 +129,14 @@ int aStar(vector<vector<int>> map) {
     unvisited.push_back(first);
 
    while (true) {
-        // if(unvisited.size() > 50) {
-        //     unvisited.erase(unvisited.begin()+50);
-        // }
         //pull expand off top node
         Node currNode = unvisited[0];
+        //cout << "Expanding from " << currNode.position.first << ", " << currNode.position.second << endl;
 
         //check if at goal
         if(currNode.position == currNode.goal) {
+            //cout << "end node at " << currNode.position.first << ", " << currNode.position.second << " points from " << currNode.parentCoords.first << ", " << currNode.parentCoords.second << " with combined heuristic " << currNode.combined_heuristic << endl;
+            //getPath(currNode, visited);
             return currNode.distance;
         }
 
@@ -208,7 +240,7 @@ void getPath(Node endNode, vector<Node> visited) {
 template <typename T>
 void printVector(vector<T> vector) {
     for(int i = 0; i < vector.size(); i++) {
-        cout << vector[i] << ", ";
+        cout << vector[i];
     }
     cout << endl;
 }
