@@ -48,11 +48,6 @@ int main() {
         else polymers[currPair]++;
     }
 
-    for(auto i : polymers) {
-            cout << i.first << ": " << i.second << endl;
-        }
-        cout << endl;
-
     for(int i = 0; i < 40; i++) {
         int count = 0;
         polymers = step(polymers, rules, quantity);
@@ -62,14 +57,10 @@ int main() {
         }
         for(auto i : polymers) {
             count += i.second;
-            cout << i.first << ": " << i.second << endl;
+            //cout << i.first << ": " << i.second << endl;
         }
-        cout << "length: " << count+1 << endl;
-        cout << endl;
-    }
-
-    for(auto i : quantity) {
-        cout << i.first << ": " << i.second << endl;
+        //cout << "length: " << count+1 << endl;
+        //cout << endl;
     }
 
     //have to do this shit because lambda for sort won't work for some dogshit reason fuck c++
@@ -119,7 +110,7 @@ map<string, long long> step(map<string, long long> polymers, map<string, string>
         string currPair = i.first;
         string insert = rules[i.first];
 
-        cout << i.second << " " << currPair << " -> " << i.second << " " << currPair[0]+insert << " and " << i.second << " " << insert + currPair[1] << endl;
+        //cout << i.second << " " << currPair << " -> " << i.second << " " << currPair[0]+insert << " and " << i.second << " " << insert + currPair[1] << endl;
 
         if(temp.find(currPair[0]+insert) == temp.end()) {
             temp.insert(pair<string, long long>(currPair[0]+insert, i.second));
